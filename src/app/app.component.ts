@@ -11,9 +11,4 @@ export class AppComponent {
   constructor(){
 
   }
-
-  public trigger() : void {
-    //todo remove this error testing becasuse promoteSynergy() does not exist
-    promoteSynergy();
-  }
 }
