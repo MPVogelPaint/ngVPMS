@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, Jsonp } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { AlertModule, 
@@ -19,6 +19,10 @@ import { AlertModule,
   TimepickerModule,
   TooltipModule, 
   TypeaheadModule } from 'ng2-bootstrap/ng2-bootstrap';
+
+import { ErrorLogService } from './error-log.service';
+import { LOGGING_ERROR_HANDLER_PROVIDERS,
+  LOGGING_ERROR_HANDLER_OPTIONS } from './logging-error-handler';
 
 @NgModule({
   declarations: [
@@ -45,7 +49,16 @@ import { AlertModule,
     TooltipModule, 
     TypeaheadModule
   ],
-  providers: [],
+  providers: [ErrorLogService, 
+    LOGGING_ERROR_HANDLER_PROVIDERS,
+    {
+      provide: LOGGING_ERROR_HANDLER_OPTIONS,
+      useValue: {
+          rethrowError: false,
+          unwrapError: false
+      }
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
